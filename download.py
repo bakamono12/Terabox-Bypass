@@ -1,8 +1,12 @@
 import requests
 import json
+from random_user_agent.user_agent import UserAgent
 
+
+ua = UserAgent()
 
 def downloader(share_id, uk, sign, timestamp, fs_id):
+    user_agent = ua.get_random_user_agent()
     headers = {
         "Accept": "*/*",
         "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
@@ -16,7 +20,7 @@ def downloader(share_id, uk, sign, timestamp, fs_id):
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-origin",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+        "User-Agent": "%s" % user_agent
     }
 
     data = json.dumps(
@@ -32,6 +36,7 @@ def downloader(share_id, uk, sign, timestamp, fs_id):
 
 
 def fetch_details(url):
+    user_agent = ua.get_random_user_agent()
     headers = {
         "Accept": "*/*",
         "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
@@ -44,7 +49,7 @@ def fetch_details(url):
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-origin",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+        "User-Agent": "%s" % user_agent,
     }
     short_url = get_short_url(url)
     url = "https://terabox-dl.qtcloud.workers.dev/api/get-info?shorturl=1%s" % short_url
@@ -56,9 +61,10 @@ def fetch_details(url):
 
 
 def get_short_url(url):
+    user_agent = ua.get_random_user_agent()
     headers = {
         "Accept": "*/*",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+        "User-Agent": "%s" % user_agent,
     }
     data = requests.get(url=url, headers=headers, allow_redirects=True, cert=False)
     if data.status_code == 200:
