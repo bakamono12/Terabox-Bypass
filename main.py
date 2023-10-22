@@ -6,7 +6,9 @@ app = Client("teraBox")
 
 @app.on_message(filters.command("start"))
 def start(client, message):
-    message.reply_text("Hello! I'm Terabox link Bypass Bot. Send me a link to download from Terabox.", quote=True)
+    message.reply_text(
+        "Hello! I'm Terabox link Bypass Bot. Send me a link to download from Terabox.\nFor bypassing a link "
+        "use\n/bypass `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
 
 
 @app.on_message(filters.command("bypass"))
@@ -38,16 +40,16 @@ def bypass(client, message):
                         video_links.append(
                             {'name': child_item['filename'], 'size': get_formatted_size(child_item['size']),
                              'link': download_link})
-                # format the links to send
-                text = ""
-                for link in video_links:
-                    text += f"Name 📹: {link['name']}\nSize 📏: {link['size']}\nDLink 📥: {link['link']}\n"
-                message.reply_text(text, quote=True)
+            # format the links to send
+            text = ""
+            for link in video_links:
+                text += f"Name 📹 : {link['name']}\n\nSize 📏 : {link['size']}\n\nDLink 📥 : [Click here]({link['link']})\n\n"
+            text += "\nCreated By [Ⴆαƙα](t.me/DTMK_C)"
+            message.reply_text(text, quote=True, disable_web_page_preview=True)
         else:
             message.reply_text("Invalid URL", quote=True)
     except IndexError as e:
         message.reply_text("Enter the URL", quote=True)
-
 
 # run the application
 app.run()

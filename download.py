@@ -67,6 +67,7 @@ def get_short_url(url):
 
 def get_formatted_size(size_bytes):
     size, unit = None, None
+    size_bytes = int(size_bytes)
 
     if size_bytes >= 1024 * 1024:
         size = size_bytes / (1024 * 1024)
