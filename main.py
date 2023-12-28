@@ -1,55 +1,66 @@
-from download import fetch_details, downloader, get_formatted_size
+import time
+import logging
 from pyrogram import Client, filters
+from config import session_string, allowed_groups, owner_id
+from downloader import check_url_patterns, fetch_download_link_async, get_formatted_size
 
-app = Client("teraBox")
+app = Client("teraBox", session_string=session_string)
+logging.basicConfig(level=logging.INFO)
 
 
 @app.on_message(filters.command("start"))
-def start(client, message):
-    message.reply_text(
-        "Hello! I'm Terabox link Bypass Bot. Send me a link to download from Terabox.\nFor bypassing a link "
-        "use\n/bypass `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
+async def start(client, message):
+    if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+        await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @DTMK_C", quote=True)
+        return
+    else:
+        await message.reply_text(
+            "Hello! I'm Terabox link Bypass Bot. Send me a link to bypass.\n"
+            "Owner: @DTMK_C\n"
+            "Eg:- `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
 
 
-@app.on_message(filters.command("bypass"))
-def bypass(client, message):
-    try:
-        url = message.text.split(" ", 1)[1]
-        files = fetch_details(url)
-        if files:
-            video_links = list()
-            data = files
-            for item in data['list']:
-                if item['is_dir'] == '0':
-                    fs_id = item['fs_id']
-                    timestamp = data['timestamp']
-                    sign = data['sign']
-                    share_id = data['shareid']
-                    uk = data['uk']
-                    download_link = downloader(share_id, uk, sign, timestamp, fs_id)
-                    video_links.append(
-                        {'name': item['filename'], 'size': get_formatted_size(item['size']), 'link': download_link})
-                elif item['is_dir'] == '1':
-                    for child_item in item['children']:
-                        fs_id = child_item['fs_id']
-                        timestamp = data['timestamp']
-                        sign = data['sign']
-                        share_id = data['shareid']
-                        uk = data['uk']
-                        download_link = downloader(fs_id, timestamp, sign, share_id, uk)
-                        video_links.append(
-                            {'name': child_item['filename'], 'size': get_formatted_size(child_item['size']),
-                             'link': download_link})
-            # format the links to send
-            text = ""
-            for link in video_links:
-                text += f"Name 📹 : {link['name']}\n\nSize 📏 : {link['size']}\n\nDLink 📥 : [Click here]({link['link']})\n\n"
-            text += "\nCreated By [Ⴆαƙα](t.me/DTMK_C)"
-            message.reply_text(text, quote=True, disable_web_page_preview=True)
-        else:
-            message.reply_text("Invalid URL", quote=True)
-    except IndexError as e:
-        message.reply_text("Enter the URL", quote=True)
+@app.on_message(filters.command("ping"))
+async def ping(client, message):
+    if message.from_user.id == owner_id:
+        start_time = time.time()
+        await message.reply_text("Pong!")
+        end_time = time.time()
+        time_taken = end_time - start_time
+        await message.reply_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
+    else:
+        pass
+
+
+def format_message(link_data):
+    file_name = link_data["server_filename"]
+    file_size = get_formatted_size(link_data["size"])
+    download_link = link_data["dlink"]
+    return f"┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`\n┖ <b>Link</b>: <a href={download_link}>Link</a>"
+
+
+@app.on_message(filters.regex(
+    pattern=r"[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"))
+async def link_handler(client, message):
+    if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+        await message.reply_text("⚠️ Forbidden! For groups access.\nContact @DTMK_C", quote=True)
+        return
+    else:
+        start_time = time.time()
+        url = message.text
+        if not check_url_patterns(url):
+            await message.reply_text("⚠️ Invalid URL!", quote=True)
+            return
+        try:
+            link_data = await fetch_download_link_async(url)
+            end_time = time.time()
+            time_taken = end_time - start_time
+            download_message = "\n\n".join([format_message(link) for link in link_data])
+            download_message = f"🔗 <b>Link Bypassed!</b>\n\n{download_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
+            await message.reply_text(download_message, quote=True)
+        except Exception as e:
+            await message.reply_text(f"Error: {e}", quote=True)
+
 
 # run the application
 app.run()
