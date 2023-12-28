@@ -92,10 +92,20 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
    - Embark on a seamless journey with the bot to bypass TeraBox links and download files effortlessly.
 
 ---
+## Deployment
+Deployment is easy, you can deploy GhostForwarder on Heroku or Railway.\
+1. Fork this repository.
+2. [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/qHge9_?referralCode=IEUhZ-)
+3. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+4. And Wait for the build to start..
+5. In environment variable section, add the following variables:
+   - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
+6. Restart the app and enjoy.
+7. To check if app is live or not, use `/ping` command in Chat.
 
+---
 ### **Contributors:**
 
 - **Bot Developer:**
   - [baka](https://t.me/DTMK_C)
 
-Feel free to customize and refine this README to match the professional aesthetic you desire for your Telegram bot.
