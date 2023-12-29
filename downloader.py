@@ -8,7 +8,7 @@ my_session = aiohttp.ClientSession(cookies=my_cookie)
 my_session.headers.update(my_headers)
 
 
-def get_formatted_size(size_bytes):
+async def get_formatted_size_async(size_bytes):
     try:
         size_bytes = int(size_bytes)
         size = size_bytes / (1024 * 1024) if size_bytes >= 1024 * 1024 else (
@@ -22,15 +22,15 @@ def get_formatted_size(size_bytes):
         return None
 
 
-def is_valid_url(url):
+async def is_valid_url_async(url):
     try:
-        _ = my_session.get(url)
-        return True
+        async with my_session.get(url) as response:
+            return response.status == 200
     except Exception as e:
         return False
 
 
-def check_url_patterns(url):
+async def check_url_patterns_async(url):
     patterns = [
         r"ww\.mirrobox\.com",
         r"www\.nephobox\.com",
@@ -55,7 +55,7 @@ def check_url_patterns(url):
         r"www\.teraboxapp\.com",
     ]
 
-    if not is_valid_url(url):
+    if not await is_valid_url_async(url):
         return False
 
     for pattern in patterns:
@@ -109,4 +109,3 @@ async def fetch_download_link_async(url):
     except aiohttp.ClientResponseError as e:
         print(f"Error fetching download link: {e}")
         return None
-
