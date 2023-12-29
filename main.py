@@ -31,9 +31,9 @@ async def ping(client, message):
     await message.reply_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
 
 
-def format_message(link_data):
+async def format_message(link_data):
     file_name = link_data["server_filename"]
-    file_size = get_formatted_size_async(link_data["size"])
+    file_size = await get_formatted_size_async(link_data["size"])
     download_link = link_data["dlink"]
     return f"┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`\n┖ <b>Link</b>: <a href={download_link}>Link</a>"
 
