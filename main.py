@@ -2,7 +2,7 @@ import time
 import logging
 from pyrogram import Client, filters
 from config import session_string, allowed_groups, owner_id
-from downloader import check_url_patterns, fetch_download_link_async, get_formatted_size
+from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
 app = Client("teraBox", session_string=session_string)
 logging.basicConfig(level=logging.INFO)
@@ -22,19 +22,18 @@ async def start(client, message):
 
 @app.on_message(filters.command("ping"))
 async def ping(client, message):
-    if message.from_user.id == owner_id:
-        start_time = time.time()
-        await message.reply_text("Pong!")
-        end_time = time.time()
-        time_taken = end_time - start_time
-        await message.reply_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
-    else:
-        pass
+    if str(message.from_user.id) != owner_id:
+        return
+    start_time = time.time()
+    await message.reply_text("Pong!")
+    end_time = time.time()
+    time_taken = end_time - start_time
+    await message.reply_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
 
 
 def format_message(link_data):
     file_name = link_data["server_filename"]
-    file_size = get_formatted_size(link_data["size"])
+    file_size = get_formatted_size_async(link_data["size"])
     download_link = link_data["dlink"]
     return f"┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`\n┖ <b>Link</b>: <a href={download_link}>Link</a>"
 
@@ -48,7 +47,7 @@ async def link_handler(client, message):
     else:
         start_time = time.time()
         url = message.text
-        if not check_url_patterns(url):
+        if not check_url_patterns_async(url):
             await message.reply_text("⚠️ Invalid URL!", quote=True)
             return
         try:
