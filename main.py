@@ -54,7 +54,7 @@ async def link_handler(client, message):
             link_data = await fetch_download_link_async(url)
             end_time = time.time()
             time_taken = end_time - start_time
-            download_message = "\n\n".join([format_message(link) for link in link_data])
+            download_message = "\n\n".join([await format_message(link) for link in link_data])
             download_message = f"🔗 <b>Link Bypassed!</b>\n\n{download_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
             await message.reply_text(download_message, quote=True)
         except Exception as e:
