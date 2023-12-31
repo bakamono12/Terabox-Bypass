@@ -47,7 +47,7 @@ async def link_handler(client, message):
     else:
         start_time = time.time()
         url = message.text
-        if not check_url_patterns_async(url):
+        if not await check_url_patterns_async(url):
             await message.reply_text("⚠️ Invalid URL!", quote=True)
             return
         try:
