@@ -26,12 +26,12 @@ async def start(client, message):
 async def ping(client, message):
     if str(message.from_user.id) != owner_id:
         return
-    await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
     start_time = time.time()
+    await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
     sent_message = await message.reply_text("Pong!", quote=True)
     end_time = time.time()
     time_taken = end_time - start_time
-    await sent_message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds", quote=True)
+    await sent_message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
 
 
 async def format_message(link_data):
