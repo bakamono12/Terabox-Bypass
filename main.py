@@ -74,7 +74,7 @@ async def link_handler(client, message):
                 download_message = (
                     f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
                 )
-                await message.edit_text(download_message, quote=True)
+                await message.edit_text(download_message)
 
         except Exception as e:
             await message.reply_text(f"Error: {e}", quote=True)
