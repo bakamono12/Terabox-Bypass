@@ -1,6 +1,6 @@
-import aiohttp
-import requests
 import re
+
+import aiohttp
 from config import my_cookie, my_headers
 
 # set the environment vars for headers and cookies

@@ -1,7 +1,7 @@
 import time
 import logging
 from pyrogram import Client, filters, enums
-from config import session_string, allowed_groups, owner_id
+from config import session_string, allowed_groups, owner_id, extract_links
 from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
 app = Client("teraBox", session_string=session_string)
@@ -26,12 +26,12 @@ async def start(client, message):
 async def ping(client, message):
     if str(message.from_user.id) != owner_id:
         return
-    start_time = time.time()
     await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+    start_time = time.time()
     sent_message = await message.reply_text("Pong!", quote=True)
     end_time = time.time()
     time_taken = end_time - start_time
-    await sent_message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
+    await sent_message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds", quote=True)
 
 
 async def format_message(link_data):
@@ -50,21 +50,32 @@ async def link_handler(client, message):
         return
     else:
         start_time = time.time()
-        url = message.text
-        if not await check_url_patterns_async(url):
+        urls = extract_links(message.text) + extract_links(message.caption)
+        if not urls:
             await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-            await message.reply_text("⚠️ Invalid URL!", quote=True)
+            await message.reply_text("⚠️ No valid URLs found!", quote=True)
             return
         try:
-            await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-            await message.reply_text("🔎 Checking URL...", quote=True)
-            link_data = await fetch_download_link_async(url)
-            end_time = time.time()
-            time_taken = end_time - start_time
-            link_message = "\n\n".join([format_message(link) for link in link_data])
-            download_message = (f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} "
-                                f"seconds")
-            await message.edit_text(download_message, quote=True)
+            for url in urls:
+                if not await check_url_patterns_async(url):
+                    await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+                    await message.reply_text("⚠️ Not a valid Terabox URL!", quote=True)
+                    continue
+
+                await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+                await message.reply_text("🔎 Processing URL...", quote=True)
+                link_data = await fetch_download_link_async(url)
+
+                end_time = time.time()
+                time_taken = end_time - start_time
+                await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+
+                link_message = "\n\n".join([await format_message(link) for link in link_data])
+                download_message = (
+                    f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
+                )
+                await message.edit_text(download_message, quote=True)
+
         except Exception as e:
             await message.reply_text(f"Error: {e}", quote=True)
 
