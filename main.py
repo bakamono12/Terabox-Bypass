@@ -11,9 +11,11 @@ logging.basicConfig(level=logging.INFO)
 @app.on_message(filters.command("start"))
 async def start(client, message):
     if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+        await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @DTMK_C", quote=True)
         return
     else:
+        await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text(
             "Hello! I'm Terabox link Bypass Bot. Send me a link to bypass.\n"
             "Owner: @DTMK_C\n"
@@ -24,11 +26,12 @@ async def start(client, message):
 async def ping(client, message):
     if str(message.from_user.id) != owner_id:
         return
+    await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
     start_time = time.time()
-    await message.reply_text("Pong!")
+    sent_message = await message.reply_text("Pong!", quote=True)
     end_time = time.time()
     time_taken = end_time - start_time
-    await message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
+    await sent_message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds", quote=True)
 
 
 async def format_message(link_data):
@@ -42,12 +45,14 @@ async def format_message(link_data):
     pattern=r"[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"))
 async def link_handler(client, message):
     if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+        await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text("⚠️ Forbidden! For groups access.\nContact @DTMK_C", quote=True)
         return
     else:
         start_time = time.time()
         url = message.text
         if not await check_url_patterns_async(url):
+            await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
             await message.reply_text("⚠️ Invalid URL!", quote=True)
             return
         try:
