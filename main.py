@@ -63,7 +63,7 @@ async def link_handler(client, message):
                     continue
 
                 await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-                await message.reply_text("🔎 Processing URL...", quote=True)
+                process_url = await message.reply_text("🔎 Processing URL...", quote=True)
                 link_data = await fetch_download_link_async(url)
 
                 end_time = time.time()
@@ -74,7 +74,7 @@ async def link_handler(client, message):
                 download_message = (
                     f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
                 )
-                await message.edit_text(download_message)
+                await process_url.edit_text(download_message)
 
         except Exception as e:
             await message.reply_text(f"Error: {e}", quote=True)
