@@ -28,7 +28,7 @@ async def ping(client, message):
     await message.reply_text("Pong!")
     end_time = time.time()
     time_taken = end_time - start_time
-    await message.reply_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
+    await message.edit_text(f"Pong!\nTime Taken: {time_taken:.2f} seconds")
 
 
 async def format_message(link_data):
