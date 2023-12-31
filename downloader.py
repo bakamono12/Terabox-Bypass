@@ -100,7 +100,7 @@ async def fetch_download_link_async(url):
                 'root': '1'
             }
 
-            async with my_session.get('https://www.terabox.app/share/list', params=params) as response2:
+            async with my_session.get('https://www.1024tera.com/share/list', params=params) as response2:
                 response_data2 = await response2.json()
                 if 'list' not in response_data2:
                     return None

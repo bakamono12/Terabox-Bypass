@@ -1,6 +1,6 @@
 import time
 import logging
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from config import session_string, allowed_groups, owner_id
 from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
@@ -51,12 +51,15 @@ async def link_handler(client, message):
             await message.reply_text("⚠️ Invalid URL!", quote=True)
             return
         try:
+            await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
+            await message.reply_text("🔎 Checking URL...", quote=True)
             link_data = await fetch_download_link_async(url)
             end_time = time.time()
             time_taken = end_time - start_time
-            download_message = "\n\n".join([format_message(link) for link in link_data])
-            download_message = f"🔗 <b>Link Bypassed!</b>\n\n{download_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
-            await message.reply_text(download_message, quote=True)
+            link_message = "\n\n".join([format_message(link) for link in link_data])
+            download_message = (f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} "
+                                f"seconds")
+            await message.edit_text(download_message, quote=True)
         except Exception as e:
             await message.reply_text(f"Error: {e}", quote=True)
 
