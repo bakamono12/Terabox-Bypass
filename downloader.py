@@ -1,11 +1,15 @@
-import re
-
+import random
+import re, os
+from aria2p import API, Download, Client
 import aiohttp
 from config import my_cookie, my_headers
 
 # set the environment vars for headers and cookies
 my_session = aiohttp.ClientSession(cookies=my_cookie)
 my_session.headers.update(my_headers)
+
+domain = os.environ.get("RAILWAY_PUBLIC_DOMAIN") or "http://localhost"
+port = os.environ.get("PORT") or 6800
 
 
 async def get_formatted_size_async(size_bytes):
@@ -99,13 +103,66 @@ async def fetch_download_link_async(url):
                 'shorturl': surl,
                 'root': '1'
             }
-
-            async with my_session.get('https://www.1024tera.com/share/list', params=params) as response2:
+            random_domain = random.choice(["https://www.1024tera.com", "https://www.4funbox.com",
+                                           "https://www.terabox.app"])
+            random_url = random_domain + '/share/list'
+            async with my_session.get(random_url, params=params) as response2:
                 response_data2 = await response2.json()
                 if 'list' not in response_data2:
                     return None
                 return response_data2['list']
-
     except aiohttp.ClientResponseError as e:
         print(f"Error fetching download link: {e}")
         return None
+
+
+class Aria2Downloader:
+    def __init__(self, download_dir='downloads'):
+        self.download_dir = download_dir
+        self.aria2 = API(Client(
+            host=domain,
+            port=port,
+            secret="baka")
+        )
+
+    def start_download(self, url):
+        options = {
+            'dir': self.download_dir,
+        }
+        download = self.aria2.add_uris([url], options=options)
+        # threading.Thread(target=self._check_download_status(download), args=(download,), daemon=True).start()
+        return self._check_download_status(download)
+
+    def _check_download_status(self, download: Download):
+        while not download.is_complete:
+            download.update()
+            status = download.status
+            download_speed = download.download_speed_string or 0
+            eta = download.eta_string or 0
+
+            progress_info = {
+                'gid': download.gid,
+                'status': status,
+                'name': download.name,
+                'downloaded': download.progress_string(),
+                'download_speed': download_speed(),
+                'eta': eta(),
+                'is_complete': download.is_complete
+            }
+            yield progress_info
+        return f"Download complete: {download.name} ({download.files[0]})"
+
+    def cancel_download(self, gid):
+        download = self.aria2.get_download(gid)
+        if download:
+            download.remove()
+
+    def pause_download(self, gid):
+        download = self.aria2.get_download(gid)
+        if download:
+            download.pause()
+
+    def resume_download(self, gid):
+        download = self.aria2.get_download(gid)
+        if download:
+            download.resume()

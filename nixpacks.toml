@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ['...', 'aria']
+
+[phases.build]
+cmds = ['echo building aria2!']
+
+[start]
+cmd = './aria.sh'
