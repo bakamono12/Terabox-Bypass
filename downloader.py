@@ -1,5 +1,5 @@
+import asyncio
 import re
-
 import aiohttp
 from config import my_cookie, my_headers
 
@@ -102,8 +102,24 @@ async def fetch_download_link_async(url):
 
             async with my_session.get('https://www.1024tera.com/share/list', params=params) as response2:
                 response_data2 = await response2.json()
+                print("res2", response_data2)
                 if 'list' not in response_data2:
                     return None
+                if response_data2['list'][0]['isdir'] == "1":
+                    params.update({
+                        'dir': response_data2['list'][0]['path'],
+                        'order': 'asc',
+                        'by': 'name',
+                        'dplogid': log_id
+                    })
+                    params.pop('desc')
+                    params.pop('root')
+                    async with my_session.get('https://www.1024tera.com/share/list', params=params) as response3:
+                        response_data3 = await response3.json()
+                        print("res3", response_data3)
+                        if 'list' not in response_data3:
+                            return None
+                        return response_data3['list']
                 return response_data2['list']
 
     except aiohttp.ClientResponseError as e:
