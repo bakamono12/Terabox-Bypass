@@ -1,5 +1,5 @@
 <div style="text-align:center" align="center">
-  <img src="./bot.jpg" alt="Bot Logo" width="200"/>
+  <img src="./images/bot.jpg" alt="Bot Logo" width="300"/>
 </div>
 
 # TeraBox Link Bypass Bot 🚀
@@ -95,11 +95,20 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 ## Deployment
 Deployment is easy, you can deploy GhostForwarder on Heroku or Railway.\
 1. Fork this repository.
-2. [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
-3. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-4. And Wait for the build to start..
-5. In environment variable section, add the following variables:
+2. In environment variable section, add the following variables:
+   - `API_ID` : Get it from [my.telegram.org](https://my.telegram.org).
+   - `API_HASH` : Get it from [my.telegram.org](https://my.telegram.org).
+   - `BOT_TOKEN` : Get it from [@BotFather](https://t.me/BotFather).
    - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
+   - `owner_id` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
+   - `allowed_groups` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
+   - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).
+   - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).
+   - `HELP VIDEO FOR TERABOX`: [![Watch the video](./images/play-button.svg)](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
+3. [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
+   - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+4. And Fill in the VARS obtained from step 2
+5. Click on Deploy.
 6. Restart the app and enjoy.
 7. To check if app is live or not, use `/ping` command in Chat.
 
