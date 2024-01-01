@@ -93,7 +93,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 ---
 ## Deployment
-Deployment is easy, you can deploy GhostForwarder on Heroku or Railway.\
+Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
 1. Fork this repository.
 2. In environment variable section, add the following variables:
    - `API_ID` : Get it from [my.telegram.org](https://my.telegram.org).
