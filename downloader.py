@@ -3,6 +3,12 @@ import re, os
 from aria2p import API, Download, Client
 import aiohttp
 from config import my_cookie, my_headers
+from dotenv import load_dotenv
+import logging
+
+logger = logging.getLogger(__name__)
+
+load_dotenv()
 
 # set the environment vars for headers and cookies
 my_session = aiohttp.ClientSession(cookies=my_cookie)
@@ -103,15 +109,25 @@ async def fetch_download_link_async(url):
                 'shorturl': surl,
                 'root': '1'
             }
-            random_domain = random.choice(["https://www.1024tera.com", "https://www.4funbox.com",
-                                           "https://www.terabox.app"])
-            random_url = random_domain + '/share/list'
+            random_url = random.choice(["https://www.1024tera.com/share/list", "https://www.terabox.app/share/list",
+                                        "https://www.4funbox.com/share/list"])
             async with my_session.get(random_url, params=params) as response2:
                 response_data2 = await response2.json()
                 if 'list' not in response_data2:
                     return None
                 return response_data2['list']
     except aiohttp.ClientResponseError as e:
+        logger.error(f"Error fetching download link: {e}")
+        return None
+
+
+async def fetch_final_link_async(url):
+    try:
+        async with my_session.get(url, allow_redirects=True) as response:
+            response.raise_for_status()
+            return str(response.url)
+    except aiohttp.ClientResponseError as e:
+        logging.error(f"Error fetching download link: {e}")
         print(f"Error fetching download link: {e}")
         return None
 
@@ -125,11 +141,11 @@ class Aria2Downloader:
             secret="baka")
         )
 
-    def start_download(self, url):
+    def start_download(self, url: list):
         options = {
             'dir': self.download_dir,
         }
-        download = self.aria2.add_uris([url], options=options)
+        download = self.aria2.add_uris(url, options=options)
         # threading.Thread(target=self._check_download_status(download), args=(download,), daemon=True).start()
         return self._check_download_status(download)
 

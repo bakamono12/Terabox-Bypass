@@ -3,3 +3,4 @@ TgCrypto~=1.2.5
 requests~=2.31.0
 aiohttp~=3.9.1
 aria2p~=0.11.3
+moviepy~=1.0.3

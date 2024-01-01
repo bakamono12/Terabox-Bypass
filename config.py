@@ -1,6 +1,9 @@
 import os
 import logging
 import re
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 my_cookie = os.environ.get("MY_COOKIES")
@@ -28,10 +31,23 @@ def extract_links(message):
         matches = re.findall(url_pattern, message)
         return matches
     except Exception as e:
-        logger.error(f"Error extracting links: {e}")
+        logger.error(f"Error extracting message links: {e}")
+        return []
+
+
+def entities_links_extractor(entities):
+    try:
+        urls = [ent.url for ent in entities if ent.type.name == "TEXT_LINK"]
+        return urls
+    except Exception as e:
+        logger.error(f"Error extracting entities links: {e}")
         return []
 
 
 async def extract_gid(message_update):
-    gid = [item.split(':')[1].strip() for item in message_update.split('\n') if 'GID' in item or 'Name' in item]
-    return gid if gid else None
+    try:
+        gid = [item.split(':')[1].strip() for item in message_update.split('\n') if 'GID' in item or 'Name' in item]
+        return gid if gid else None
+    except Exception as e:
+        logger.error(f"Error extracting gid: {e}")
+        return None
