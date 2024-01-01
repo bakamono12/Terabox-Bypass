@@ -5,14 +5,20 @@ import time
 import logging
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from config import session_string, allowed_groups, owner_id, extract_links, extract_gid, EMOJI, PATH
-from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async, Aria2Downloader
+from config import session_string, allowed_groups, owner_id, extract_links, extract_gid, EMOJI, PATH, \
+    entities_links_extractor
+from convert_video import convert_video
+from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async, Aria2Downloader, \
+    fetch_final_link_async
+from tqdm import tqdm
 
-app = Client("teraBox", session_string=session_string)
+app = Client("teraBox", session_string=session_string, workers=3)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 # initialize downloader
 downloader = Aria2Downloader()
+
 
 @app.on_message(filters.command("start"))
 async def start(client, message):
@@ -75,7 +81,6 @@ async def link_handler(client, message):
                 end_time = time.time()
                 link_data = await fetch_download_link_async(url)
                 time_taken = end_time - start_time
-                await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
                 link_message = "\n\n".join([await format_message(link) for link in link_data])
                 download_message = (
                     f"🔗 <b>Link Bypassed!</b>\n\n{link_message}\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
@@ -89,28 +94,20 @@ async def link_handler(client, message):
 
 @app.on_callback_query(filters.regex(r"download"))
 async def download_handler(client, callback_data):
-    url = callback_data.message.reply_to_message.text
+    url = entities_links_extractor(callback_data.message.entities)
     # check if the link sender and the button clicker are the same
-    if callback_data.from_user.id != callback_data.message.reply_to_message.from_user.id:
-        await callback_data.answer("You didn't send this link.", show_alert=True)
-        return
     cancel_buttons = [
         InlineKeyboardButton("Cancel", callback_data="cancel"),
     ]
+    upload_buttons = [
+        InlineKeyboardButton("Upload", callback_data="upload"),
+    ]
     # Initialize the download
     files = downloader.start_download(url)
-    response_text = "Starting download..."
+    download_message = callback_data
+    await download_message.edit_message_text("📥 Downloading...", reply_markup=InlineKeyboardMarkup([cancel_buttons]))
     for file_update in files:
         try:
-            response_text = (
-                f"Status: `{file_update['status']}`\n"
-                f"Name: `{file_update['name']}`\n"
-                f"Downloaded: `{file_update['downloaded']}`\n"
-                f"Speed: `{file_update['download_speed']}`\n"
-                f"ETA: `{file_update['eta']}`\n"
-                f"GID: `{file_update['gid']}`"
-            )
-            await callback_data.edit_message_text(response_text, reply_markup=InlineKeyboardMarkup([cancel_buttons]))
             if file_update['is_complete']:
                 response_text = (
                     f"Status: `{file_update['status']}`\n"
@@ -118,13 +115,23 @@ async def download_handler(client, callback_data):
                     f"Downloaded: `{file_update['downloaded']}\n`"
                     f"GID: `{file_update['gid']}`"
                 )
-                await callback_data.edit_message_text(response_text)
+                await download_message.edit_message_text(response_text,
+                                                         reply_markup=InlineKeyboardMarkup([upload_buttons]))
                 break
+            response_text = (
+                f"Status: `{file_update['status']}` {random.choice(EMOJI)}\n"
+                f"Name: `{file_update['name']}`\n"
+                f"Downloaded: `{file_update['downloaded']}`\n"
+                f"Speed: `{file_update['download_speed']}`\n"
+                f"ETA: `{file_update['eta']}`\n"
+                f"GID: `{file_update['gid']}`"
+            )
+            await download_message.edit_message_text(response_text, reply_markup=InlineKeyboardMarkup([cancel_buttons]))
             await asyncio.sleep(3.5)
         except Exception as e:
             logger.error(e)
+            await download_message.edit_message_text(f"Some Error Occurred: {e}\n\n {random.choice(EMOJI)}")
             await asyncio.sleep(2.5)
-            await callback_data.edit_message_text(f"Some Error Occurred: {e}\n\n {random.choice(EMOJI)}")
 
 
 @app.on_callback_query(filters.regex(r"cancel"))
@@ -139,9 +146,47 @@ async def cancel_download_handler(client, callback_data):
             return
         except Exception as e:
             logger.error(e)
-            await callback_data.message.edit_text(f"Some Error Occurred: {e}\n\n {random.choice(EMOJI)}")
+            await callback_data.message.edit_text(f"Some Error Occurred: {e}\n{random.choice(EMOJI)}")
             return
     await callback_data.message.edit_text("Download already completed/Cancelled/Removed.")
+
+
+async def upload_progress(current, total, message):
+    # Create tqdm progress bar
+    with tqdm(total=total, unit='B', unit_scale=True, desc='Uploading Video') as progress_bar:
+        progress_bar.update(current)
+        while progress_bar.n < total:
+            await asyncio.sleep(1)  # Update progress every second
+            progress_bar.update(current - progress_bar.n)
+            # Update the message with the current progress
+            await message.message.edit_message_text(f"Uploading Video: {progress_bar.n}/{total} bytes")
+
+
+@app.on_callback_query(filters.regex(r"upload"))
+async def upload_handler(client, callback_data):
+    # Handle upload button click
+    upload_buttons = [
+        InlineKeyboardButton("Upload", callback_data="upload"),
+    ]
+    name, gid = await extract_gid(callback_data.message.text)
+    name = PATH + "/" + name
+    thumbnail, duration, width, height = convert_video(name)
+    if gid:
+        try:
+            await client.send_chat_action(callback_data.message.chat.id, enums.ChatAction.UPLOAD_VIDEO)
+            await client.send_video(callback_data.message.chat.id, name, thumb=thumbnail,
+                                    duration=int(duration),
+                                    width=int(width),
+                                    height=int(height),
+                                    progress=upload_progress,
+                                    progress_args=tuple(callback_data))
+            return
+        except Exception as e:
+            logger.error(e)
+            await callback_data.message.edit_message_text(f"Some Error Occurred: {e}\n{random.choice(EMOJI)}",
+                                                  reply_markup=InlineKeyboardMarkup([upload_buttons]))
+            return
+    await callback_data.message.edit_message_text("Download already completed/Cancelled/Removed.")
 
 
 # run the application
