@@ -55,8 +55,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 ### **Additional Information:**
 
-- **Owner:**
-  - Telegram Username: [@DTMK_C](https://t.me/DTMK_C)
+- **Bot Link:**
+  - Telegram Username: [Terabox Bypass](https://t.me/badbakabot)
 
 - **Forbidden Access:**
   - Groups not listed in the `allowed_groups` variable will receive a polite warning.
