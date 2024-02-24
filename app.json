@@ -4,8 +4,8 @@
     "repository": "https://github.com/bakamono12/Terabox-Bypass",
     "logo": "https://avatars1.githubusercontent.com/u/34474300?s=280&v=4",
     "keywords": ["python", "pyrogram", "telegram", "bot", "userbot", "Forwarder"],
+    "image": "heroku/python",
     "env": {
-
         "BOT_TOKEN": {
             "description": "Your bot token.",
             "required": true
