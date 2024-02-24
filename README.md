@@ -11,8 +11,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 ---
 
-### **Features:**
-
+<details>
+<summary><b>Features</b></summary>
 1. **Start Command:**
    - `/start`: Initiates communication with the bot, presenting users with a refined introduction and clear usage instructions.
 
@@ -28,7 +28,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
    - Restricts usage to private chats or specified groups, prioritizing privacy and controlled access.
    - Issues a courteous warning when accessed from unauthorized groups.
 
----
+</details>
 
 <details>
 1. **/start:**
@@ -38,9 +38,6 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
    - Empowers the bot owner with the ability to gauge responsiveness and latency in a refined manner.
 
 </details>
-
-
----
 
 <details>
 <summary><b>How to Use</b></summary>
@@ -55,7 +52,6 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 </details>
 
----
 <details>
 <summary><b>Additional Information</b></summary>
 - **Bot Link:**
@@ -69,7 +65,6 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 </details>
 
----
 <details>
 <summary><b>More Information</b></summary>
 - **Dependencies:**
@@ -84,10 +79,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 </details>
 
----
-
-### **How to Run:**
-
+<details>
+<summary><b>How to Run</b></summary>
 1. **Install Dependencies:**
    - Execute `pip install -r requirements.txt` to install the required Python libraries.
 
@@ -97,19 +90,21 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 3. **Enjoy:**
    - Embark on a seamless journey with the bot to bypass TeraBox links and download files effortlessly.
 
+</details>
+
 ---
 ## Deployment
 <b>Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.</b>
 1. Fork this repository.
 2. In environment variable section, add the following variables:
-  - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
-  - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
-  - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
-  - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
-  - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
-  - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
-  - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
-  - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
+   - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+   - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
+   - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
+   - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
+   - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
+   - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
+   - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
+   - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
 3. Deploy and enjoy.
 4. To check if app is live or not, use `/ping` command in Chat.
 
@@ -122,9 +117,3 @@ ping - check bot alive
 <b>Deploy</b><br>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
-
----
-### **Contributors:**
-
-- **Bot Developer:**
-  - [baka](https://t.me/DTMK_C)
