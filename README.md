@@ -113,15 +113,8 @@ start - start me
 ping - check bot alive
 ```
 
-<details>
-<summary><b>Deploy to Heroku</b></summary>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
-</details>
-
-<details>
-<summary><b>Deploy to Railway</b></summary>
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
-</details>
 
 ---
 ### **Contributors:**
