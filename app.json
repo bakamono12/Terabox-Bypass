@@ -5,6 +5,19 @@
     "logo": "https://avatars1.githubusercontent.com/u/34474300?s=280&v=4",
     "keywords": ["python", "pyrogram", "telegram", "bot", "userbot", "Forwarder"],
     "env": {
+
+        "BOT_TOKEN": {
+            "description": "Your bot token.",
+            "required": true
+        },
+        "API_ID": {
+            "description": "Get this value from https://my.telegram.org",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "Get this value from https://my.telegram.org",
+            "required": true
+        },
         "SESSION_STRING": {
             "description": "Session string from auth.py file or use the Replit link button in README.md",
             "required": true

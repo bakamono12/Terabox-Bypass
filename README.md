@@ -59,7 +59,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
   - Telegram Username: [Terabox Bypass](https://t.me/badbakabot)
 
 - **Forbidden Access:**
-  - Groups not listed in the `allowed_groups` variable will receive a polite warning.
+  - Groups not listed in the `ALLOWED_GROUPS` variable will receive a polite warning.
 
 - **Error Handling:**
   - Displays an informative error message if there are issues with link processing, maintaining transparency.
@@ -72,7 +72,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
   - Install necessary Python libraries using `pip install -r requirements.txt`.
 
 - **Customization:**
-  - Adjust the `allowed_groups` variable for precise group access control.
+  - Adjust the `ALLOWED_GROUPS` variable for precise group access control.
   - Tailor the error messages or other text as needed, ensuring a polished user interface.
 
 - **Disclaimer:**
@@ -100,8 +100,8 @@ Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
    - `API_HASH` : Get it from [my.telegram.org](https://my.telegram.org).
    - `BOT_TOKEN` : Get it from [@BotFather](https://t.me/BotFather).
    - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
-   - `owner_id` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
-   - `allowed_groups` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
+   - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
+   - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
    - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).
    - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).
    - `HELP VIDEO FOR TERABOX`: [![Watch the video](./images/play-button.svg)](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
