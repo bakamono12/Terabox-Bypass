@@ -106,7 +106,7 @@ Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
    - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).
    - `HELP VIDEO FOR TERABOX`: [![Watch the video](./images/play-button.svg)](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
 3. [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
-   - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+   - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
 4. And Fill in the VARS obtained from step 2
 5. Click on Deploy.
 6. Restart the app and enjoy.
