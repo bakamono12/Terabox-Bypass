@@ -107,8 +107,8 @@ Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
 3. Deploy and enjoy.
 4. To check if app is live or not, use `/ping` command in Chat.
 
-<p>Commands</p>
-```json
+<b>Commands</b>
+```python
 start - start me
 ping - check bot alive
 ```
