@@ -1,7 +1,7 @@
 import time
 import logging
 from pyrogram import Client, filters, enums
-from config import session_string, allowed_groups, owner_id, extract_links
+from config import session_string, ALLOWED_GROUPS, OWNER_ID, extract_links
 from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
 app = Client("teraBox", session_string=session_string)
@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 @app.on_message(filters.command("start"))
 async def start(client, message):
-    if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+    if message.chat.type.value != "private" and str(message.chat.id) not in ALLOWED_GROUPS:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @DTMK_C", quote=True)
         return
@@ -24,7 +24,7 @@ async def start(client, message):
 
 @app.on_message(filters.command("ping"))
 async def ping(client, message):
-    if str(message.from_user.id) != owner_id:
+    if str(message.from_user.id) != OWNER_ID:
         return
     await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
     start_time = time.time()
@@ -44,7 +44,7 @@ async def format_message(link_data):
 @app.on_message(filters.regex(
     pattern=r"[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"))
 async def link_handler(client, message):
-    if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
+    if message.chat.type.value != "private" and str(message.chat.id) not in ALLOWED_GROUPS:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text("⚠️ Forbidden! For groups access.\nContact @DTMK_C", quote=True)
         return
