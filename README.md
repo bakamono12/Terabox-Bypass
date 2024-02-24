@@ -4,9 +4,6 @@
 
 # TeraBox Link Bypass Bot 🚀
 
----
-
-### **Description:**
 The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamlessly bypass download links from the TeraBox file hosting service. Users can send TeraBox links to the bot, and it will elegantly provide direct download links along with comprehensive information about the file.
 
 ---
@@ -31,6 +28,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 </details>
 
 <details>
+<summary><b>Commands</b></summary>
 1. **/start:**
    - Invokes a welcome message with clear instructions, setting the tone for user engagement.
 
