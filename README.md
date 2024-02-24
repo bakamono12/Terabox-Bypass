@@ -1,5 +1,5 @@
 <div style="text-align:center" align="center">
-  <img src="./images/spidey.jpg" alt="Bot-Logo"/>
+  <img src="./images/Fubuki-Shiragami.mp4" alt="Bot-Logo"/>
 </div>
 
 # TeraBox Link Bypass Bot 🚀
