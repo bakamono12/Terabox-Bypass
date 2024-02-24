@@ -9,7 +9,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 ---
 
 <details>
-<summary><b>Features</b></summary><br>
+<summary><b>Features</b></summary>
+
 1. **Start Command:**
    - `/start`: Initiates communication with the bot, presenting users with a refined introduction and clear usage instructions.
 
@@ -28,7 +29,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 </details>
 
 <details>
-<summary><b>Commands</b></summary><br>
+<summary><b>Commands</b></summary>
+
 1. **/start:**
    - Invokes a welcome message with clear instructions, setting the tone for user engagement.
 
@@ -39,6 +41,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 <details>
 <summary><b>How to Use</b></summary>
+
 1. **Start a Chat:**
    - Initiate a private chat with the bot, ensuring a discreet and personalized experience.
 
@@ -52,6 +55,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 <details>
 <summary><b>Additional Information</b></summary>
+
 - **Bot Link:**
   - Telegram Username: [Terabox Bypass](https://t.me/badbakabot)
 
@@ -65,6 +69,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 <details>
 <summary><b>More Information</b></summary>
+
 - **Dependencies:**
   - Install necessary Python libraries using `pip install -r requirements.txt`.
 
@@ -79,6 +84,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 <details>
 <summary><b>How to Run</b></summary>
+
 1. **Install Dependencies:**
    - Execute `pip install -r requirements.txt` to install the required Python libraries.
 
