@@ -1,10 +1,10 @@
 import time
 import logging
 from pyrogram import Client, filters, enums
-from config import session_string, ALLOWED_GROUPS, OWNER_ID, extract_links
+from config import SESSION_STRING, ALLOWED_GROUPS, OWNER_ID, extract_links
 from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
-app = Client("teraBox", session_string=session_string)
+app = Client("teraBox", SESSION_STRING=SESSION_STRING)
 logging.basicConfig(level=logging.INFO)
 
 

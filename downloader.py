@@ -1,11 +1,11 @@
 import asyncio
 import re
 import aiohttp
-from config import my_cookie, my_headers
+from config import MY_COOKIES, MY_HEADERS
 
 # set the environment vars for headers and cookies
-my_session = aiohttp.ClientSession(cookies=my_cookie)
-my_session.headers.update(my_headers)
+my_session = aiohttp.ClientSession(cookies=MY_COOKIES)
+my_session.headers.update(MY_HEADERS)
 
 
 async def get_formatted_size_async(size_bytes):
