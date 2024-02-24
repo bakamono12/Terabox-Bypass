@@ -93,17 +93,17 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 ---
 ## Deployment
-Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
+<b>Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.</b>
 1. Fork this repository.
 2. In environment variable section, add the following variables:
-   - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
-   - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
-   - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
-   - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
-   - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
-   - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
-   - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login). [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
-   - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login). [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
+ - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+ - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
+ - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
+ - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
+ - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
+ - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
+ - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
+ - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
 3. Deploy and enjoy.
 4. To check if app is live or not, use `/ping` command in Chat.
 
@@ -113,7 +113,7 @@ start - start me
 ping - check bot alive
 ```
 
-<b>Deploy</b>
+<b>Deploy</b><br>
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
 
