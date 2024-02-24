@@ -96,21 +96,27 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.
 1. Fork this repository.
 2. In environment variable section, add the following variables:
-   - `API_ID` : Get it from [my.telegram.org](https://my.telegram.org).
-   - `API_HASH` : Get it from [my.telegram.org](https://my.telegram.org).
-   - `BOT_TOKEN` : Get it from [@BotFather](https://t.me/BotFather).
+   - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+   - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
+   - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
    - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
    - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
    - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
    - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).
    - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).
-   - `HELP VIDEO FOR TERABOX`: [![Watch the video](./images/play-button.svg)](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595) credits to [@r0ld3x](https://github.com/r0ld3x)
-3. [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
-   - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
+    [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/_l3iQY?referralCode=IEUhZ-)
+    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/youesky/Terabox-Bypass)
 4. And Fill in the VARS obtained from step 2
 5. Click on Deploy.
 6. Restart the app and enjoy.
 7. To check if app is live or not, use `/ping` command in Chat.
+
+## Get terabox cookie and header [Tutorial for Terabox]:
+
+1. Login in terabox with premium or normal account
+2. Open any terabox link and watch the video below
+
+https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595
 
 ---
 ### **Contributors:**
