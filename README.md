@@ -9,7 +9,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 ---
 
 <details>
-<summary><b>Features</b></summary>
+<summary><b>Features</b></summary><br>
 1. **Start Command:**
    - `/start`: Initiates communication with the bot, presenting users with a refined introduction and clear usage instructions.
 
@@ -28,7 +28,7 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 </details>
 
 <details>
-<summary><b>Commands</b></summary>
+<summary><b>Commands</b></summary><br>
 1. **/start:**
    - Invokes a welcome message with clear instructions, setting the tone for user engagement.
 
