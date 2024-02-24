@@ -30,18 +30,20 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 ---
 
-### **Commands:**
-
+<details>
 1. **/start:**
    - Invokes a welcome message with clear instructions, setting the tone for user engagement.
 
 2. **/ping:**
    - Empowers the bot owner with the ability to gauge responsiveness and latency in a refined manner.
 
+</details>
+
+
 ---
 
-### **How to Use:**
-
+<details>
+<summary><b>How to Use</b></summary>
 1. **Start a Chat:**
    - Initiate a private chat with the bot, ensuring a discreet and personalized experience.
 
@@ -51,10 +53,11 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 3. **Receive Download Links:**
    - Experience the bot's efficiency as it provides direct download links and comprehensive file information.
 
+</details>
+
 ---
-
-### **Additional Information:**
-
+<details>
+<summary><b>Additional Information</b></summary>
 - **Bot Link:**
   - Telegram Username: [Terabox Bypass](https://t.me/badbakabot)
 
@@ -64,10 +67,11 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 - **Error Handling:**
   - Displays an informative error message if there are issues with link processing, maintaining transparency.
 
+</details>
+
 ---
-
-### **More Information:**
-
+<details>
+<summary><b>More Information</b></summary>
 - **Dependencies:**
   - Install necessary Python libraries using `pip install -r requirements.txt`.
 
@@ -77,6 +81,8 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 
 - **Disclaimer:**
   - This bot is intended for educational and personal use only, upholding the highest standards of ethical use.
+
+</details>
 
 ---
 
@@ -96,14 +102,14 @@ The *TeraBox Link Bypass Bot* is a sophisticated Telegram bot crafted to seamles
 <b>Deployment is easy, you can deploy Terabox Bypass on Heroku or Railway.</b>
 1. Fork this repository.
 2. In environment variable section, add the following variables:
- - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
- - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
- - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
- - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
- - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
- - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
- - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
- - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
+  - `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+  - `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
+  - `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
+  - `SESSION_STRING` : Get it from [![Run on Repl.it](https://replit.com/badge/github/bakamono12/GhostForwarder)](https://replit.com/@baka1432/PyroGramAuth).
+  - `OWNER_ID` : Your Telegram ID.[Get it from here](https://t.me/userinfobot)
+  - `ALLOWED_GROUPS` : ID of groups where the bot should work(with square `[]` brackets). eg:- ["-12323xxxx"] or ["1212xxx", "1236xxx"]
+  - `MY_COOKIES` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
+  - `MY_HEADERS` : Get it from [here](https://www.terabox.com/user/login).    [Watch the video](https://github.com/r0ld3x/terabox-downloader-bot/issues/2#issuecomment-1856180595)
 3. Deploy and enjoy.
 4. To check if app is live or not, use `/ping` command in Chat.
 
